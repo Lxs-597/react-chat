@@ -5,31 +5,26 @@ import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import './config'
 
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { createLogger } from 'redux-logger'
-import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import reducers from './reducers'
+import store from './store/store'
 
 import App from './App'
-
-const logger = createLogger()
-
-const store = createStore(
-  reducers,
-  applyMiddleware(
-    logger,
-    thunk
-  )
-)
+import Login from './containers/login/Login'
+import Register from './containers/register/Register'
+import AuthRoute from './components/authroute/AuthRoute'
 
 FastClick.attach(document.body)
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route path="/" component={App}></Route>
+      <div>
+        <AuthRoute></AuthRoute>
+        <Route path="/" exact component={App}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/register" component={Register}></Route>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root')
