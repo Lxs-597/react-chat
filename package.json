@@ -31,5 +31,5 @@
     "react-app-rewired": "^1.5.2",
     "sass-loader": "^7.0.1"
   },
-  "proxy": "http://localhost:9001/"
+  "proxy": "http://localhost:9001"
 }
