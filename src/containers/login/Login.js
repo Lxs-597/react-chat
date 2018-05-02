@@ -1,27 +1,49 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { login } from '../../actions/loginAction'
 import Logo from '../../components/logo/Logo'
 
 import { Button, WhiteSpace, WingBlank, List, InputItem, Toast } from 'antd-mobile'
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      user: '',
+      pwd: '',
+    }
 
     this.login = this.login.bind(this)
   }
 
   login() {
-    Toast.info('login', 1)
+    this.props.login(this.state)
+    console.log(this.props.user)    
+  }
+
+  handleChange(key, value) {
+    this.setState({
+      [key]: value
+    })
   }
 
   render() {
     return (
       <div>
+        { this.props.user.redirectTo && <Redirect to={this.props.user.redirectTo}/> }
         <Logo/>
         <WingBlank>
           <List>
-            <InputItem>用户名</InputItem>
-            <InputItem type="password">密码</InputItem>
+            <InputItem 
+              onChange={this.handleChange.bind(this, 'user')}
+            >用户名</InputItem>
+            <InputItem 
+              type="password"
+              onChange={this.handleChange.bind(this, 'pwd')}
+            >密码</InputItem>
           </List>
           <WhiteSpace/>
           <Button type="primary" onClick={this.login}>登录</Button>
@@ -31,4 +53,15 @@ class Login extends Component {
   }
 }
 
-export default Login
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  login: bindActionCreators(login, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)

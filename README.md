@@ -26,7 +26,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - cd到mongodb安装目录的bin目录下
 
-- 输入mongod --config D:\mongodb\mongod.conf --install serviceName "MongoDB",如果没有任何提示表示成功，这一步需要以管理员身份打开cmd
+- 输入mongod --config D:\mongodb\mongod.conf --install -serviceName "MongoDB",如果没有任何提示表示成功，这一步需要以管理员身份打开cmd
 
 - net start MongoDB 显示已启动
 

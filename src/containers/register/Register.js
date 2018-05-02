@@ -1,6 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { register } from '../../actions/registerAction'
 import Logo from '../../components/logo/Logo'
 
@@ -21,11 +22,8 @@ class Register extends React.Component {
     this.register = this.register.bind(this)
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   register() {
+    console.log(this.props)
     this.props.register(this.state)
   }
 
@@ -48,26 +46,21 @@ class Register extends React.Component {
     ]
     return (
       <div>
+        { this.props.user.redirectTo && <Redirect to={this.props.user.redirectTo}/> }
         <Logo/>
         <WingBlank>
           <List>
             <InputItem
               onChange={this.handleChange.bind(this, 'user')}
-            >
-              用户名
-            </InputItem>
+            >用户名</InputItem>
             <InputItem
               type="password"
               onChange={this.handleChange.bind(this, 'pwd')}
-            >
-              密码
-            </InputItem>
+            >密码</InputItem>
             <InputItem
               type="password"
               onChange={this.handleChange.bind(this, 'repeat')}
-            >
-              确认密码
-            </InputItem>
+            >确认密码</InputItem>
           </List>
           <WhiteSpace/>
           { identities.map( item => (

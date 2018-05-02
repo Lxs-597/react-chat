@@ -12,7 +12,7 @@ const registerError = msg => ({
 })
 
 export const register = state => {
-  const { user, pwd, repeat, indentity } = state
+  const { user, pwd, repeat, identity } = state
 
   if(!user || !pwd) {
     return registerError('用户名密码不能为空！')
@@ -23,10 +23,10 @@ export const register = state => {
   }
 
   return dispatch => {
-    axios.post('/register', {user, pwd, indentity})
+    axios.post('/user/register', {user, pwd, identity})
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
-          dispatch(registerSuccess({user, pwd, indentity}))
+          dispatch(registerSuccess({user, pwd, identity}))
         } else {
           dispatch(registerError(res.data.msg))
         }
