@@ -116,9 +116,12 @@ router.get('/info', (req, res) => {
 })
 
 router.get('/list', (req, res) => {
-  // userModel.remove({}, (err, doc) => {})
-  userModel.find({}, (err, doc) => {
-    return res.json(doc)
+  const { identity } = req.query
+  userModel.find({identity}, (err, doc) => {
+    return res.json({
+      code: 0,
+      data: doc
+    })
   })
 })
 
