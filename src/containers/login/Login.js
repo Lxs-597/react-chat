@@ -2,10 +2,10 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { login } from '../../actions/loginAction'
+import { login } from '../../actions/userActions'
 import Logo from '../../components/logo/Logo'
 
-import { Button, WhiteSpace, WingBlank, List, InputItem, Toast } from 'antd-mobile'
+import { Button, WhiteSpace, WingBlank, List, InputItem } from 'antd-mobile'
 
 class Login extends React.Component {
   constructor(props) {

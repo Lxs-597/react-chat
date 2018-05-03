@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import axios from 'axios'
 
-import { loadUserInfo } from '../../actions/loginAction'
+import { setUserInfo } from '../../actions/userActions'
 
 class AuthRoute extends React.Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class AuthRoute extends React.Component {
     axios.get('/user/info')
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
-          this.props.loadUserInfo(res.data.data)
+          this.props.setUserInfo(res.data.data)
         } else {
           this.props.history.replace('/')
         }
@@ -33,7 +33,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loadUserInfo: bindActionCreators(loadUserInfo, dispatch)
+  setUserInfo: bindActionCreators(setUserInfo, dispatch)
 })
 
 export default withRouter(

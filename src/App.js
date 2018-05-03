@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Logo from './components/logo/Logo'
 
 import { Button, WhiteSpace, WingBlank } from 'antd-mobile'
@@ -22,6 +24,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        { this.props.user.redirectTo && <Redirect to={this.props.user.redirectTo}/> }
         <Logo/>
         <WingBlank>
           <Button type="primary" onClick={this.login}>登录</Button>
@@ -33,4 +36,10 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(
+  mapStateToProps
+)(App)

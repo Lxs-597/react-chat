@@ -9,13 +9,6 @@ const _filter = {
   '__v': 0
 }
 
-router.get('/list', (req, res) => {
-  // userModel.remove({}, (err, doc) => {})
-  userModel.find({}, (err, doc) => {
-    return res.json(doc)
-  })
-})
-
 router.post('/login', (req, res) => {
   const { user, pwd } = req.body
 
@@ -78,6 +71,25 @@ router.post('/register', (req, res) => {
   })
 })
 
+router.post('/update', (req, res) => {
+  const userid = req.cookies.userid
+
+  if (!userid) {
+    return json.dumps({ code: 1 })
+  }
+
+  const body = req.body
+  userModel.findByIdAndUpdate(userid, body, (err, doc) => {
+    const { user, identity } = doc
+    const data = { user, identity, ...body }
+
+    return res.json({
+      code: 0,
+      data
+    })
+  })
+})
+
 router.get('/info', (req, res) => {
   const { userid } = req.cookies
 
@@ -100,6 +112,13 @@ router.get('/info', (req, res) => {
         data: doc
       })
     }
+  })
+})
+
+router.get('/list', (req, res) => {
+  // userModel.remove({}, (err, doc) => {})
+  userModel.find({}, (err, doc) => {
+    return res.json(doc)
   })
 })
 

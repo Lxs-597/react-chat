@@ -2,10 +2,10 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { register } from '../../actions/registerAction'
+import { register } from '../../actions/userActions'
 import Logo from '../../components/logo/Logo'
 
-import { Button, WhiteSpace, WingBlank, Radio,List, InputItem, Toast } from 'antd-mobile'
+import { Button, WhiteSpace, WingBlank, Radio,List, InputItem } from 'antd-mobile'
 const RadioItem =Radio.RadioItem
 
 class Register extends React.Component {
