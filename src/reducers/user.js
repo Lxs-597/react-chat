@@ -1,4 +1,4 @@
-import { SET_USER_INFO, SET_USER_INFO_ERR } from '../constants/userTypes'
+import { SET_USER_INFO, SET_USER_INFO_ERR, CLEAR_USER_INFO } from '../constants/userTypes'
 import { getRedirectPath } from '../utils/redirectPath'
 
 const initialState = {
@@ -21,6 +21,11 @@ export const user = (state=initialState, action) => {
       return {
         ...state,
         msg: action.msg,
+      }
+    case CLEAR_USER_INFO:
+      return {
+        ...initialState,
+        redirectTo: '/'
       }
     default:
       return state

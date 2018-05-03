@@ -1,25 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Switch, Route } from 'react-router-dom'
 
 import Tabs from '../../components/tabs/Tabs'
 import Boss from '../boss/Boss'
+import Genius from '../genius/Genius'
+import User from '../user/User'
 import { NavBar } from 'antd-mobile'
 
-function Genius(){
-  return (
-    <h2>Genius</h2>
-  )
-}
 function Message(){
   return (
     <h2>Message</h2>
-  )
-}
-function User(){
-  return (
-    <h2>User</h2>
   )
 }
 

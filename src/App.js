@@ -22,9 +22,11 @@ class App extends Component {
   }
 
   render() {
+    const { redirectTo } = this.props.user
+    const { pathname } = this.props.location
     return (
       <div>
-        { this.props.user.redirectTo && <Redirect to={this.props.user.redirectTo}/> }
+        { redirectTo && redirectTo !== pathname && <Redirect to={redirectTo}/> }
         <Logo/>
         <WingBlank>
           <Button type="primary" onClick={this.login}>登录</Button>

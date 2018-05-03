@@ -1,4 +1,4 @@
-import { SET_USER_INFO, SET_USER_INFO_ERR } from '../constants/userTypes'
+import { SET_USER_INFO, SET_USER_INFO_ERR, CLEAR_USER_INFO } from '../constants/userTypes'
 import axios from 'axios'
 
 export const setUserInfo = data => ({
@@ -11,8 +11,12 @@ export const setUserInfoErr = msg => ({
   msg
 })
 
+export const clearUserInfo = () => ({
+  type: CLEAR_USER_INFO
+})
+
 export const login = state => {
-  const { user, pwd } = state 
+  const { user, pwd } = state
 
   if (!user || !pwd) {
     return setUserInfoErr('用户名密码不能为空！')
@@ -55,7 +59,7 @@ export const register = state => {
 
 export const update = state => {
   return dispatch => {
-    axios.post('/user/update', state) 
+    axios.post('/user/update', state)
       .then(res => {
         if (res.status === 200 && res.data.code === 0 ) {
           dispatch(setUserInfo(res.data.data))

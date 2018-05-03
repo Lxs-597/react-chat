@@ -11,11 +11,11 @@ class AvatarSelector extends React.Component {
   }
   render() {
     const avatarList = ['boy', 'girl', 'man', 'woman', 'bull', 'chick', 'crab', 'hedgehog', 'hippopotamus', 'koala', 'lemur', 'pig', 'tiger', 'whale', 'zebra']
-    const avatars = avatarList.map(name => ({ 
-      icon: require(`./images/${name}.png`),
+    const avatars = avatarList.map(name => ({
+      icon: require(`../../images/${name}.png`),
       text: name
     }))
-    const header = this.state.avatar 
+    const header = this.state.avatar
                     ? (<div>
                         <span style={{paddingRight: '10px'}}>已选择头像</span>
                         <img src={this.state.avatar} style={{width: 12, height: 12}} alt=""/>
@@ -25,8 +25,8 @@ class AvatarSelector extends React.Component {
       <div>
         <List renderHeader={()=>header}>
           <Grid
-            style={this.state.avatar} 
-            data={avatars} 
+            style={this.state.avatar}
+            data={avatars}
             columnNum={5}
             onClick={el => {
               this.setState({avatar: el.icon})
@@ -39,4 +39,4 @@ class AvatarSelector extends React.Component {
   }
 }
 
-export default AvatarSelector 
+export default AvatarSelector

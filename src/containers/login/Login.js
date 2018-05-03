@@ -21,7 +21,7 @@ class Login extends React.Component {
 
   login() {
     this.props.login(this.state)
-    console.log(this.props.user)    
+    console.log(this.props.user)
   }
 
   handleChange(key, value) {
@@ -31,16 +31,18 @@ class Login extends React.Component {
   }
 
   render() {
+    const { redirectTo } = this.props.user
+    const { pathname } = this.props.location
     return (
       <div>
-        { this.props.user.redirectTo && <Redirect to={this.props.user.redirectTo}/> }
+        { redirectTo && redirectTo !== pathname && <Redirect to={redirectTo}/> }
         <Logo/>
         <WingBlank>
           <List>
-            <InputItem 
+            <InputItem
               onChange={this.handleChange.bind(this, 'user')}
             >用户名</InputItem>
-            <InputItem 
+            <InputItem
               type="password"
               onChange={this.handleChange.bind(this, 'pwd')}
             >密码</InputItem>
