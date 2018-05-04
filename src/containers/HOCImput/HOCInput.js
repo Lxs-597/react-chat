@@ -15,7 +15,7 @@ export default function HOCInput(Comp) {
         [key]: val
       })
     }
-
+ 
     render() {
       return (
         <Comp handleChange={this.handleChange} state={this.state} {...this.props}></Comp>
