@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { register } from '../../actions/userActions'
 import Logo from '../../components/logo/Logo'
+import HOCInput from '../HOCImput/HOCInput'
 
 import { Button, WhiteSpace, WingBlank, Radio,List, InputItem } from 'antd-mobile'
 const RadioItem =Radio.RadioItem
@@ -12,31 +13,16 @@ class Register extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      user: '',
-      pwd: '',
-      repeat: '',
-      identity: 'genius'
-    }
-
     this.register = this.register.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.handleChange('identity', 'genius')
   }
 
   register() {
     console.log(this.props)
-    this.props.register(this.state)
-  }
-
-  handleRadioChange(value) {
-    this.setState({
-      identity: value,
-    })
-  }
-
-  handleChange(key, value) {
-    this.setState({
-      [key]: value
-    })
+    this.props.register(this.props.state)
   }
 
   render() {
@@ -51,23 +37,23 @@ class Register extends React.Component {
         <WingBlank>
           <List>
             <InputItem
-              onChange={this.handleChange.bind(this, 'user')}
+              onChange={this.props.handleChange.bind(this, 'user')}
             >用户名</InputItem>
             <InputItem
               type="password"
-              onChange={this.handleChange.bind(this, 'pwd')}
+              onChange={this.props.handleChange.bind(this, 'pwd')}
             >密码</InputItem>
             <InputItem
               type="password"
-              onChange={this.handleChange.bind(this, 'repeat')}
+              onChange={this.props.handleChange.bind(this, 'repeat')}
             >确认密码</InputItem>
           </List>
           <WhiteSpace/>
           { identities.map( item => (
             <RadioItem
               key={item.value}
-              checked={this.state.identity === item.value}
-              onChange={this.handleRadioChange.bind(this, item.value)}
+              checked={this.props.state.identity === item.value}
+              onChange={this.props.handleChange.bind(this, 'identity', item.value)}
             >
               { item.label }
             </RadioItem>
@@ -94,4 +80,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToprops,
   mapDispatchToProps
-)(Register)
+)(HOCInput(Register))

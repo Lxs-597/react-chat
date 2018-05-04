@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login } from '../../actions/userActions'
 import Logo from '../../components/logo/Logo'
+import HOCInput from '../HOCImput/HOCInput'
 
 import { Button, WhiteSpace, WingBlank, List, InputItem } from 'antd-mobile'
 
@@ -11,23 +12,12 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      user: '',
-      pwd: '',
-    }
-
     this.login = this.login.bind(this)
   }
 
   login() {
-    this.props.login(this.state)
+    this.props.login(this.props.state)
     console.log(this.props.user)
-  }
-
-  handleChange(key, value) {
-    this.setState({
-      [key]: value
-    })
   }
 
   render() {
@@ -40,11 +30,11 @@ class Login extends React.Component {
         <WingBlank>
           <List>
             <InputItem
-              onChange={this.handleChange.bind(this, 'user')}
+              onChange={this.props.handleChange.bind(this, 'user')}
             >用户名</InputItem>
             <InputItem
               type="password"
-              onChange={this.handleChange.bind(this, 'pwd')}
+              onChange={this.props.handleChange.bind(this, 'pwd')}
             >密码</InputItem>
           </List>
           <WhiteSpace/>
@@ -66,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(HOCInput(Login))
