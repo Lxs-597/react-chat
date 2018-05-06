@@ -5,14 +5,23 @@ import { getChatList } from '../../actions/chatActions'
 import ChatList from '../../components/chatList/ChatList'
 
 class Genius extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleCardClick = this.handleCardClick.bind(this)
+  }
 
   componentDidMount() {
     this.props.getChatList('boss')
   }
 
+  handleCardClick(chat) {
+    this.props.history.push(`/chat/${chat._id}`)
+  }
+
   render() {
     return (
-      <ChatList chatList={this.props.chat.chatList}/>
+      <ChatList handleCardClick={this.handleCardClick} chatList={this.props.chat.chatList}/>
     )
   }
 }

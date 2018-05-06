@@ -3,6 +3,7 @@ const router = express.Router()
 const md5 = require('blueimp-md5')
 const model = require('./model')
 const userModel = model.getModel('user')
+const chatModel = model.getModel('chat')
 
 const _filter = {
   'pwd': 0,
@@ -60,10 +61,10 @@ router.post('/register', (req, res) => {
           msg: '数据库错误！'
         })
       }
-      
+
       const { user, identity, _id } = d
       res.cookie('userid', _id)
-      return res.json({ 
+      return res.json({
         code: 0,
         data: { user, identity, _id }
       })
@@ -122,6 +123,19 @@ router.get('/list', (req, res) => {
       code: 0,
       data: doc
     })
+  })
+})
+
+router.get('/getmsglist', (req, res) => {
+  const userid = req.cookies.userid
+  // { '$or': {from: user, to: user} }
+  chatModel.find({},(err, doc) => {
+    if (!err) {
+      return res.json({
+        code: 0,
+        data: doc
+      })
+    }
   })
 })
 

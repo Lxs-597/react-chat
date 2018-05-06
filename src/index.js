@@ -16,6 +16,7 @@ import Register from './containers/register/Register'
 import BossInfo from './containers/bossInfo/BossInfo'
 import GeniusInfo from './containers/geniusInfo/GeniusInfo'
 import Tourist from './containers/tourist/Tourist'
+import Chat from './containers/chat/Chat'
 import AuthRoute from './components/authroute/AuthRoute'
 
 FastClick.attach(document.body)
@@ -31,6 +32,7 @@ ReactDOM.render(
           <Route path="/register" component={Register}></Route>
           <Route path="/bossinfo" component={BossInfo}></Route>
           <Route path="/geniusinfo" component={GeniusInfo}></Route>
+          <Route path="/chat/:user" component={Chat}></Route>
           <Route component={Tourist}></Route>
         </Switch>
       </div>

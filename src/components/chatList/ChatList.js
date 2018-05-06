@@ -8,7 +8,7 @@ class ChatList extends React.Component {
         { this.props.chatList.map(chat => (
           <div key={chat.user}>
             <WhiteSpace/>
-            <Card>
+            <Card onClick={this.props.handleCardClick.bind(this, chat)}>
               <Card.Header
                 title={chat.user}
                 thumb={require(`../../images/${chat.avatar}.png`) || null}

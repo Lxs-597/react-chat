@@ -25,7 +25,7 @@ export const user = (state=initialState, action) => {
     case CLEAR_USER_INFO:
       return {
         ...initialState,
-        redirectTo: '/'
+        redirectTo: ''
       }
     default:
       return state

@@ -18,6 +18,7 @@ class App extends Component {
   }
 
   login() {
+    console.log(this.props)
     this.props.history.push('/login')
   }
 
