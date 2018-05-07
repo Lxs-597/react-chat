@@ -128,14 +128,26 @@ router.get('/list', (req, res) => {
 
 router.get('/getmsglist', (req, res) => {
   const userid = req.cookies.userid
-  // { '$or': {from: user, to: user} }
-  chatModel.find({},(err, doc) => {
-    if (!err) {
-      return res.json({
-        code: 0,
-        data: doc
-      })
-    }
+  userModel.find({}, (err, userdoc) => {
+
+    let users = {}
+
+    userdoc.forEach(user => {
+      users[user.id] = {
+        name: user.user,
+        avatar: user.avatar
+      }
+    })
+    
+    chatModel.find({ '$or': [{from: userid}, {to: userid}] },(e, doc) => {
+      if (!e) {
+        return res.json({
+          code: 0,
+          data: doc,
+          users
+        })
+      }
+    })
   })
 })
 

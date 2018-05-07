@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getMsgList, sendMessage, receiveMsg } from '../../actions/msgActions'
 import { Switch, Route } from 'react-router-dom'
 
 import Tabs from '../../components/tabs/Tabs'
@@ -19,6 +21,13 @@ class Tourist extends React.Component {
     super(props)
 
     this.handleTabClick = this.handleTabClick.bind(this)
+  }
+
+  componentDidMount() {
+    if (!this.props.msgs.msgs.length) {
+      this.props.getMsgList()
+      this.props.receiveMsg()
+    }
   }
 
   handleTabClick(path) {
@@ -71,16 +80,23 @@ class Tourist extends React.Component {
             )) }
           </Switch>
         </div>
-        <Tabs data={navList} pathname={pathname} handleTabClick={this.handleTabClick}/>
+        <Tabs unread={this.props.msgs.unread} data={navList} pathname={pathname} handleTabClick={this.handleTabClick}/>
       </div>
     )
   }
 }
 
 const mapStateToprops = state => ({
-  user: state.user
+  user: state.user,
+  msgs: state.msgs
+})
+
+const mapDispatchToProps = dispatch => ({
+  getMsgList: bindActionCreators(getMsgList, dispatch),
+  receiveMsg: bindActionCreators(receiveMsg, dispatch),
 })
 
 export default connect(
-  mapStateToprops
+  mapStateToprops,
+  mapDispatchToProps
 )(Tourist)

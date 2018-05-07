@@ -6,7 +6,8 @@ import {
 
 const initalState = {
   msgs: [],
-  unread: 0
+  unread: 0,
+  users: {}
 }
 
 export const msgs = (state=initalState, action) => {
@@ -14,14 +15,17 @@ export const msgs = (state=initalState, action) => {
     case SET_MSG_LIST:
       return {
         ...state,
-        msgs: action.data,
-        unread: action.data.filter(msg => !msg.read).length
+        msgs: action.msgs,
+        unread: action.msgs.filter(msg => !msg.read && msg.to === action.userid).length,
+        users: action.users
       }
     case SET_MSG_RECEIVED:
+      const num = action.msg.to === action.userid ? 1 : 0
+      console.log(action)
       return {
         ...state,
         msgs: [...state.msgs, action.msg],
-        unread: state.unread + 1
+        unread: state.unread + num
       }
     case SET_MSG_READED:
     default:

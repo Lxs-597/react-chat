@@ -8,6 +8,8 @@ const chatModel = model.getModel('chat')
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+// chatModel.remove({}, (e, d) => {})
+
 io.on('connection', socket => {
   console.log('io connection')
   socket.on('message', data => {

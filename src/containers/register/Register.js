@@ -21,7 +21,6 @@ class Register extends React.Component {
   }
 
   register() {
-    console.log(this.props)
     this.props.register(this.props.state)
   }
 

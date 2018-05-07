@@ -9,6 +9,7 @@ class Tabs extends React.Component {
       <TabBar> 
         { tabs.map(t => (
           <TabBar.Item 
+            badge={t.path === '/message' && this.props.unread}
             key={t.text}
             title={t.text}
             icon={{uri: require(`./images/${t.icon}.png`)}}
